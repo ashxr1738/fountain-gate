@@ -1,0 +1,8 @@
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+import { StatusBadge } from "@/components/status-badge";
+import { requireProfile } from "@/lib/auth";
+import { createClient } from "@/lib/supabase/server";
+import { displayDate } from "@/lib/utils";
+
+export default async function MyRequestsPage({ searchParams }: { searchParams: Promise<{ message?: string }> }) { const profile = await requireProfile(); const { message } = await searchParams; const supabase = await createClient(); const { data } = await supabase.from("requests").select("id,asset_id,purpose,requested_from,requested_until,status,rejection_reason,assets(name,asset_code)").eq("user_id", profile.id).order("created_at", { ascending: false }); return <div className="space-y-5"><div><h1 className="text-3xl font-bold">My Requests</h1><p className="text-slate-600">Track approval status.</p></div>{message && <p className="rounded-lg bg-green-50 p-3 text-sm text-green-700">✓ {message}</p>}<div className="space-y-3">{(data || []).map((request: any) => <Link href={`/assets/${request.asset_id}`} key={request.id}><Card><div className="flex justify-between gap-3"><div><h2 className="font-bold">{request.assets?.name}</h2><p className="mt-1 text-sm text-slate-600">{request.purpose}</p><p className="mt-1 text-xs text-slate-500">{displayDate(request.requested_from)} → {displayDate(request.requested_until)}</p>{request.rejection_reason && <p className="mt-2 text-sm text-red-700">Reason: {request.rejection_reason}</p>}</div><StatusBadge status={request.status}/></div></Card></Link>)}</div>{!data?.length && <Card className="text-center text-slate-600">You have not made any requests.</Card>}</div>; }
