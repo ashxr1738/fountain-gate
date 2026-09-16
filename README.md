@@ -17,3 +17,5 @@ A deliberately small Next.js + Supabase app for one workflow: add equipment, req
 Only the `ADMIN` and `DEVELOPER` roles can manage assets or decide requests. The database functions perform the request, approval, checkout, and return transitions atomically; UI role checks are not relied on for security.
 
 QR codes encode the application's asset-code URL (for example `/assets/code/KEY-001`), so a phone camera opens that asset page directly.
+
+# fountain-gate-
