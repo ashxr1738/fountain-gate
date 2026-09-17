@@ -1,0 +1,2 @@
+-- Placeholder migration created for Supabase GitHub Integration.
+-- Add schema changes here before running `supabase db push`.
