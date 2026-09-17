@@ -1,0 +1,12 @@
+# Supabase CLI configuration for GitHub Integration and local development.
+# Replace project_id with the Supabase project reference when linking locally.
+project_id = "church-equipment"
+
+[db]
+major_version = 17
+
+[api]
+enabled = true
+
+[auth]
+enabled = true
