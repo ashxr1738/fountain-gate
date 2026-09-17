@@ -41,7 +41,8 @@ fgcn/
 1. Create a Supabase project.
 2. Run [`backend/database/migrations/202609160001_initial.sql`](backend/database/migrations/202609160001_initial.sql) in the Supabase SQL Editor.
 3. Run [`backend/database/migrations/202609180001_request_queue.sql`](backend/database/migrations/202609180001_request_queue.sql) to enable queued request commits.
-4. In Supabase Authentication, enable email/password sign-in.
+4. Run [`backend/database/migrations/202609190001_pickup_verification.sql`](backend/database/migrations/202609190001_pickup_verification.sql) to persist QR pickup verification.
+5. In Supabase Authentication, enable email/password sign-in.
 
 ### 2. Environment Variables
 - Copy `frontend/.env.example` to `frontend/.env.local`

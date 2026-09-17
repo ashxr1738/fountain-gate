@@ -30,6 +30,7 @@ export type EquipmentRequest = {
   created_at: string;
   approved_at: string | null;
   approved_by: string | null;
+  pickup_verified_at: string | null;
   rejection_reason: string | null;
   asset?: Asset;
   requester?: Pick<Profile, "name" | "email">;
