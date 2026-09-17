@@ -28,8 +28,11 @@ export async function deleteAsset(formData: FormData) {
 export async function requestAsset(formData: FormData) {
   await requireProfile(); const assetId = String(formData.get("asset_id"));
   const supabase = await createClient();
-  const { error } = await supabase.rpc("request_asset", { p_asset_id: assetId, p_purpose: String(formData.get("purpose") || ""), p_requested_from: String(formData.get("requested_from")), p_requested_until: String(formData.get("requested_until")) });
-  if (error) fail(`/assets/${assetId}`, error.message);
+  const { data: { session } } = await supabase.auth.getSession();
+  const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
+  if (!session || !backendUrl) fail(`/assets/${assetId}`, "Request service is not configured.");
+  const response = await fetch(`${backendUrl}/api/requests`, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` }, body: JSON.stringify({ assetId, purpose: String(formData.get("purpose") || ""), requestedFrom: String(formData.get("requested_from")), requestedUntil: String(formData.get("requested_until")) }), cache: "no-store" });
+  if (!response.ok) { const body = await response.json().catch(() => ({})); fail(`/assets/${assetId}`, body.error || "Request could not be queued."); }
   revalidatePath("/"); revalidatePath("/assets"); redirect("/my-requests?message=Request+sent");
 }
 

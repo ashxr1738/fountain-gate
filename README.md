@@ -40,11 +40,14 @@ fgcn/
 ### 1. Database Setup
 1. Create a Supabase project.
 2. Run [`backend/database/migrations/202609160001_initial.sql`](backend/database/migrations/202609160001_initial.sql) in the Supabase SQL Editor.
-3. In Supabase Authentication, enable email/password sign-in.
+3. Run [`backend/database/migrations/202609180001_request_queue.sql`](backend/database/migrations/202609180001_request_queue.sql) to enable queued request commits.
+4. In Supabase Authentication, enable email/password sign-in.
 
 ### 2. Environment Variables
 - Copy `frontend/.env.example` to `frontend/.env.local`
 - Copy `backend/.env.example` to `backend/.env`
+- Set `REDIS_URL` to a persistent Redis instance. The backend worker retries failed jobs and removes successful jobs after the Supabase transaction commits.
+- Set `VITE_BACKEND_URL` for the Vite frontend and `NEXT_PUBLIC_BACKEND_URL` for the Next frontend to the deployed backend URL.
 
 ### 3. Install & Run
 Install dependencies at the root:

@@ -57,6 +57,11 @@ button:disabled { opacity: .6; cursor: wait; }
 .request-list { display: grid; } .request-card { padding: 20px; border-bottom: 1px solid #edf2ee; } .request-card:last-child { border-bottom: 0; } .request-top { align-items: start; } .request-top h2 { margin: 10px 0 4px; font-size: 17px; } .request-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; color: #64756c; font-size: 12px; } .request-details b { display: block; margin-bottom: 4px; color: #365447; } .request-actions { display: flex; align-items: center; gap: 8px; margin-top: 18px; } .request-actions input { flex: 1; padding: 9px; } .danger { background: #b94d41; }
 .modal-backdrop { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 20px; background: #18332a55; } .modal { display: grid; width: min(100%, 460px); gap: 16px; margin: 0; padding: 24px; border-radius: 14px; background: #fff; box-shadow: 0 20px 60px #18332a33; } .modal-heading { margin-bottom: 4px; } .modal-heading h2 { margin: 0 0 4px; }
 .audit-row time { margin-left: auto; white-space: nowrap; font-size: 12px; }
+.scanner-body { display: grid; gap: 14px; padding: 20px; }
+.scanner-video { width: 100%; max-height: min(58vh, 520px); min-height: 220px; border-radius: 10px; background: #18332a; object-fit: cover; }
+.scan-result { margin-top: 20px; }
+.scan-result-body { display: grid; gap: 4px; padding: 20px; }
+.request-form textarea { min-height: 88px; width: 100%; padding: 13px 14px; border: 1px solid #cbd9ce; border-radius: 9px; resize: vertical; }
 @media (max-width: 780px) { .mobile-menu { display: inline-flex; } .topbar { padding: 14px 18px; } .sidebar { position: fixed; top: 65px; bottom: 0; left: 0; z-index: 9; display: none; box-shadow: 8px 0 30px #18332a18; } .sidebar.open { display: block; } .portal-content { padding: 32px 18px 60px; } .stat-grid { grid-template-columns: repeat(2, 1fr); } .user-email { display: none; } .row-date { display: none; } }
 header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px max(24px, calc((100vw - 1120px) / 2)); border-bottom: 1px solid #dce6df; background: #fff; }
 .brand, .header-actions, .secondary, .icon-button { display: flex; align-items: center; gap: 9px; }

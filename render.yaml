@@ -2,7 +2,7 @@ services:
   - type: web
     name: fountain-gate-backend
     runtime: node
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: npm install && npm run build:backend
+    startCommand: node backend/dist/server.js
     healthCheckPath: /health
     autoDeploy: true
