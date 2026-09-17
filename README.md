@@ -42,7 +42,8 @@ fgcn/
 2. Run [`backend/database/migrations/202609160001_initial.sql`](backend/database/migrations/202609160001_initial.sql) in the Supabase SQL Editor.
 3. Run [`backend/database/migrations/202609180001_request_queue.sql`](backend/database/migrations/202609180001_request_queue.sql) to enable queued request commits.
 4. Run [`backend/database/migrations/202609190001_pickup_verification.sql`](backend/database/migrations/202609190001_pickup_verification.sql) to persist QR pickup verification.
-5. In Supabase Authentication, enable email/password sign-in.
+5. Run [`backend/database/migrations/202609200001_oauth_user_profiles.sql`](backend/database/migrations/202609200001_oauth_user_profiles.sql) to repair and record OAuth users.
+6. In Supabase Authentication, enable email/password sign-in and configure the Google provider.
 
 ### 2. Environment Variables
 - Copy `frontend/.env.example` to `frontend/.env.local`
