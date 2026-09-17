@@ -1,4 +1,5 @@
 import { createClient, type Session } from "@supabase/supabase-js";
+import { createRoot } from "react-dom/client";
 import { useEffect, useState } from "react";
 import { LogOut, PackageSearch, RefreshCw } from "lucide-react";
 import "./globals.css";
@@ -56,3 +57,5 @@ function App() {
 }
 
 export default App;
+
+createRoot(document.getElementById("root")!).render(<App />);
