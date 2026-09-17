@@ -46,7 +46,7 @@ fgcn/
 ### 2. Environment Variables
 - Copy `frontend/.env.example` to `frontend/.env.local`
 - Copy `backend/.env.example` to `backend/.env`
-- Set `REDIS_URL` to a persistent Redis instance. The backend worker retries failed jobs and removes successful jobs after the Supabase transaction commits.
+- Set `REDIS_URL` to the Upstash Redis connection string from **Connect**, including the `rediss://` scheme. Do not use `UPSTASH_REDIS_REST_URL` or the REST token; BullMQ needs the Redis TCP connection. The backend worker retries failed jobs and removes successful jobs after the Supabase transaction commits.
 - Set `VITE_BACKEND_URL` for the Vite frontend and `NEXT_PUBLIC_BACKEND_URL` for the Next frontend to the deployed backend URL.
 
 ### 3. Install & Run

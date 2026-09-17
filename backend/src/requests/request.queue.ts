@@ -16,6 +16,9 @@ const queueName = "equipment-requests";
 function redisConnection(): IORedis {
   const redisUrl = process.env.REDIS_URL;
   if (!redisUrl) throw new Error("REDIS_URL is not configured.");
+  if (redisUrl.startsWith("https://") || redisUrl.startsWith("http://")) {
+    throw new Error("REDIS_URL must be Upstash's rediss:// Redis connection URL, not its REST URL.");
+  }
   return new IORedis(redisUrl, { maxRetriesPerRequest: null });
 }
 
