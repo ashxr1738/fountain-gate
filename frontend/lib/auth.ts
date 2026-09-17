@@ -11,8 +11,16 @@ export async function currentProfile(): Promise<Profile | null> {
   const { data } = await supabase.from("users").select("id,name,email,role").eq("id", user.id).single();
   return data as Profile | null;
 }
-export async function requireProfile() {
-  if (!hasSupabaseConfig()) redirect("/login?error=Supabase+is+not+configured.+Add+the+project+URL+and+publishable+key+to+use+equipment+requests.");
-  const profile = await currentProfile(); if (!profile) redirect("/login"); return profile;
+
+export async function requireProfile(): Promise<Profile> {
+  if (!hasSupabaseConfig()) {
+    redirect("/login?error=Supabase+is+not+configured.+Add+the+project+URL+and+publishable+key+to+use+equipment+requests.");
+  }
+  const profile = await currentProfile();
+  if (!profile) redirect("/login");
+  return profile;
 }
-export function isAdmin(profile: Profile) { return profile.role === "ADMIN" || profile.role === "DEVELOPER"; }
+
+export function isAdmin(profile: Profile): boolean {
+  return profile.role === "ADMIN" || profile.role === "DEVELOPER";
+}
