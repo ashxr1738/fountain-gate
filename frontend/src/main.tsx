@@ -11,8 +11,11 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 function Login({ onSignedIn }: { onSignedIn: (session: Session) => void }) {
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -21,13 +24,31 @@ function Login({ onSignedIn }: { onSignedIn: (session: Session) => void }) {
     if (!supabase) return setError("Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel.");
     setBusy(true);
     setError("");
-    const { data, error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    setMessage("");
+    const result = mode === "signin"
+      ? await supabase.auth.signInWithPassword({ email, password })
+      : await supabase.auth.signUp({ email, password, options: { data: { name } } });
     setBusy(false);
-    if (signInError) return setError(signInError.message);
-    if (data.session) onSignedIn(data.session);
+    if (result.error) return setError(result.error.message);
+    if (result.data.session) onSignedIn(result.data.session);
+    else if (mode === "signup") setMessage("Account created. Check your email to confirm your address, then sign in.");
   }
 
-  return <main className="auth-shell"><section className="auth-card"><p className="eyebrow">CHURCH EQUIPMENT</p><h1>Welcome back</h1><p className="muted">Request and return church equipment.</p>{error && <p className="alert">{error}</p>}<form onSubmit={submit}><label>Email<input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label><label>Password<input required type="password" value={password} onChange={(event) => setPassword(event.target.value)} /></label><button disabled={busy}>{busy ? "Signing in..." : "Sign in"}</button></form></section></main>;
+  async function signInWithGoogle() {
+    if (!supabase) return setError("Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel.");
+    setBusy(true);
+    setError("");
+    const { error: oauthError } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: window.location.origin },
+    });
+    if (oauthError) {
+      setBusy(false);
+      setError(oauthError.message);
+    }
+  }
+
+  return <main className="auth-shell"><section className="auth-card"><p className="eyebrow">CHURCH EQUIPMENT</p><h1>{mode === "signin" ? "Welcome back" : "Create your account"}</h1><p className="muted">Request and return church equipment.</p>{error && <p className="alert">{error}</p>}{message && <p className="success">{message}</p>}<button className="google-button" type="button" disabled={busy} onClick={() => void signInWithGoogle()}>Continue with Google</button><div className="divider"><span>or use email</span></div><form onSubmit={submit}>{mode === "signup" && <label>Name<input required value={name} onChange={(event) => setName(event.target.value)} /></label>}<label>Email<input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label><label>Password<input required minLength={6} type="password" value={password} onChange={(event) => setPassword(event.target.value)} /></label><button disabled={busy}>{busy ? "Please wait..." : mode === "signin" ? "Sign in" : "Create account"}</button></form><button className="link-button" type="button" onClick={() => { setMode(mode === "signin" ? "signup" : "signin"); setError(""); setMessage(""); }}>{mode === "signin" ? "New here? Create an account" : "Already have an account? Sign in"}</button></section></main>;
 }
 
 function Dashboard({ session, onSignOut }: { session: Session; onSignOut: () => void }) {
@@ -58,4 +79,9 @@ function App() {
 
 export default App;
 
-createRoot(document.getElementById("root")!).render(<App />);
+const rootElement = document.getElementById("root");
+if (!rootElement) throw new Error("Missing root element");
+const hotData = import.meta.hot?.data as { root?: ReturnType<typeof createRoot> } | undefined;
+const root = hotData?.root ?? createRoot(rootElement);
+if (import.meta.hot) import.meta.hot.data.root = root;
+root.render(<App />);

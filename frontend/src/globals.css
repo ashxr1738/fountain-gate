@@ -21,6 +21,11 @@ input:focus { border-color: #28604e; box-shadow: 0 0 0 3px #28604e1a; }
 button { border: 0; border-radius: 9px; padding: 13px 16px; background: #28604e; color: white; font-weight: 700; }
 button:disabled { opacity: .6; cursor: wait; }
 .alert { padding: 12px 14px; border-radius: 9px; background: #fff0ed; color: #a33e30; font-size: 14px; }
+.success { padding: 12px 14px; border-radius: 9px; background: #edf8ef; color: #28604e; font-size: 14px; }
+.google-button { background: #fff; color: #18332a; border: 1px solid #cbd9ce; }
+.divider { display: flex; align-items: center; gap: 12px; margin: 22px 0 -8px; color: #8a9a90; font-size: 12px; }
+.divider::before, .divider::after { content: ""; height: 1px; flex: 1; background: #d8e4da; }
+.link-button { width: 100%; margin-top: 16px; padding: 8px; background: transparent; color: #28604e; font-size: 14px; }
 .app-shell { min-height: 100vh; }
 header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px max(24px, calc((100vw - 1120px) / 2)); border-bottom: 1px solid #dce6df; background: #fff; }
 .brand, .header-actions, .secondary, .icon-button { display: flex; align-items: center; gap: 9px; }
