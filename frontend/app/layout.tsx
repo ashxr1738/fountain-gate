@@ -11,5 +11,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#28604e", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><PwaRegister/>{children}</body></html>;
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-background text-foreground">
+        <PwaRegister />
+        {children}
+      </body>
+    </html>
+  );
 }
