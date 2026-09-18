@@ -6,10 +6,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLBut
     <button
       ref={ref}
       className={cn(
-        "inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50",
-        variant === "default" && "bg-primary text-primary-foreground hover:bg-primary/90",
-        variant === "outline" && "border border-border bg-card text-card-foreground hover:bg-accent",
-        variant === "danger" && "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        "inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50",
+        variant === "default" && "bg-slate-900 text-white shadow-sm hover:bg-slate-800",
+        variant === "outline" && "border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 hover:text-slate-900",
+        variant === "danger" && "bg-red-600 text-white shadow-sm hover:bg-red-500",
         className
       )}
       {...props}

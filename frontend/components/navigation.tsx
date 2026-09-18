@@ -11,24 +11,27 @@ export function Navigation({ profile }: { profile: Profile }) {
 
   return (
     <>
-      <header className="border-b border-border bg-background/80 backdrop-blur-sm">
+      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-          <Link href="/" className="text-lg font-bold tracking-tight text-foreground">
+          <Link href="/" className="text-lg font-bold tracking-tight text-slate-900">
             Church Equipment
           </Link>
           <form action={signOut}>
-            <button title="Sign out" className="rounded-lg p-2 text-muted-foreground transition hover:bg-accent hover:text-foreground">
-              <LogOut size={20} />
+            <button
+              title="Sign out"
+              className="rounded-xl border border-slate-200 bg-slate-50 p-2 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+            >
+              <LogOut size={18} />
             </button>
           </form>
         </div>
       </header>
 
-      <nav className="sticky bottom-0 z-10 border-t border-border bg-card/95 md:sticky md:top-0 md:bottom-auto">
-        <div className="mx-auto flex max-w-5xl overflow-x-auto px-2">
+      <nav className="sticky bottom-0 z-10 border-t border-slate-200 bg-white/90 md:sticky md:top-0 md:bottom-auto">
+        <div className="mx-auto flex max-w-5xl items-center gap-2 overflow-x-auto px-2 py-2">
           {links.map(([label, href]) => (
             <Link
-              className="whitespace-nowrap px-3 py-3 text-sm font-medium text-muted-foreground transition hover:text-foreground"
+              className="whitespace-nowrap rounded-xl px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
               href={href}
               key={href}
             >
