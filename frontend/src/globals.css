@@ -8,6 +8,7 @@
 body { margin: 0; min-width: 320px; }
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid #65edb7; outline-offset: 3px; }
 .auth-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at top right, #dcece1, transparent 40%), #f4f7f2; }
 .auth-card { width: min(100%, 430px); padding: 40px; border: 1px solid #d8e4da; border-radius: 18px; background: #fff; box-shadow: 0 18px 50px #204d3512; }
 .eyebrow { margin: 0 0 8px; color: #28604e; font-size: 12px; font-weight: 700; letter-spacing: .12em; }
@@ -18,7 +19,7 @@ form { display: grid; gap: 16px; margin-top: 28px; }
 label { display: grid; gap: 7px; color: #365447; font-size: 14px; font-weight: 600; }
 input { width: 100%; padding: 13px 14px; border: 1px solid #cbd9ce; border-radius: 9px; color: #18332a; outline: none; }
 textarea { width: 100%; min-height: 88px; padding: 13px 14px; border: 1px solid #cbd9ce; border-radius: 9px; color: #18332a; resize: vertical; }
-input:focus { border-color: #28604e; box-shadow: 0 0 0 3px #28604e1a; }
+input:focus, textarea:focus, select:focus { border-color: #65edb7; box-shadow: 0 0 0 3px #65edb733; }
 button { border: 0; border-radius: 9px; padding: 13px 16px; background: #28604e; color: white; font-weight: 700; }
 button:disabled { opacity: .6; cursor: wait; }
 .alert { padding: 12px 14px; border-radius: 9px; background: #fff0ed; color: #a33e30; font-size: 14px; }
@@ -27,6 +28,13 @@ button:disabled { opacity: .6; cursor: wait; }
 .divider { display: flex; align-items: center; gap: 12px; margin: 22px 0 -8px; color: #8a9a90; font-size: 12px; }
 .divider::before, .divider::after { content: ""; height: 1px; flex: 1; background: #d8e4da; }
 .link-button { width: 100%; margin-top: 16px; padding: 8px; background: transparent; color: #28604e; font-size: 14px; }
+.password-row { display: grid; grid-template-columns: 1fr auto; gap: 7px 12px; }
+.password-row label { grid-column: 1; }
+.password-reset { align-self: end; padding: 0; font-size: 13px; }
+.password-field { position: relative; grid-column: 1 / -1; }
+.password-field input { padding-right: 46px; }
+.password-toggle { position: absolute; top: 50%; right: 4px; display: grid; width: 36px; height: 36px; place-items: center; padding: 0; transform: translateY(-50%); background: transparent; color: #8ff5ce; }
+.password-toggle:hover { background: #17383e; }
 .app-shell, .portal { min-height: 100vh; }
 .topbar { position: sticky; top: 0; z-index: 10; }
 .header-left { display: flex; min-width: 0; align-items: center; gap: 10px; }
@@ -47,12 +55,12 @@ button:disabled { opacity: .6; cursor: wait; }
 .nav-item { display: flex; width: 100%; align-items: center; gap: 10px; margin: 3px 0; padding: 11px 12px; background: transparent; color: #64756c; text-align: left; font-size: 13px; }
 .nav-item:hover, .nav-item.active { background: #edf4ef; color: #28604e; }
 .nav-item.active { font-weight: 700; }
-.portal-content { width: min(100%, 1180px); margin: 0 auto; padding: 42px 32px 72px; }
+.portal-content { width: min(100%, 1180px); margin: 0 auto; padding: 36px 32px 64px; }
 .mobile-menu { display: none; padding: 8px; background: transparent; color: #28604e; }
 .page-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
 .page-header h1 { margin-bottom: 6px; }
 .page-header button, .request-actions button { display: inline-flex; align-items: center; gap: 7px; }
-.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
 .stat-card { padding: 20px; border: 1px solid #d8e4da; border-left: 4px solid #28604e; border-radius: 12px; background: #fff; }
 .stat-card.blue { border-left-color: #3973b9; } .stat-card.amber { border-left-color: #d49737; } .stat-card.red { border-left-color: #bb5548; }
 .stat-card span { display: block; color: #64756c; font-size: 12px; } .stat-card strong { display: block; margin-top: 10px; font: 700 32px 'Space Grotesk', sans-serif; }
