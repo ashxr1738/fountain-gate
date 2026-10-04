@@ -78,8 +78,15 @@ const categoryData = [
   { label: "Tools", value: 9, color: "bg-amber-500" },
 ];
 
+interface CatalogItem {
+  id: string;
+  name: string;
+  category: string;
+  status: string;
+  icon: string;
+}
+
 type Screen = "login" | "catalog" | "analytics" | "crud";
-type CatalogItem = (typeof catalogSeed)[number] & { status: string };
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    ROOT — WORKSPACE PREVIEW ENTRY

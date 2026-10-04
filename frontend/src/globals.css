@@ -150,3 +150,70 @@ button:hover { background: #28e69a; }
 .stat-card.red { border-left-color: #ef6c63; }
 .user-dashboard-grid { align-items: start; }
 @media (max-width: 780px) { .portal-content { background: #07181d; } }
+
+/* ──────────────────────────────────────────────────────
+   QR / Barcode Scanner
+   ────────────────────────────────────────────────────── */
+
+/* Viewport container */
+.scanner-viewport { position: relative; border-radius: 12px; overflow: hidden; background: #020a0c; }
+.scanner-viewport video { display: block; }
+
+/* Flash animation on detection */
+@keyframes scanFlash { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+.scanner-flash::after { content: ""; position: absolute; inset: 0; background: #00c97833; pointer-events: none; animation: scanFlash .4s ease-out forwards; border-radius: inherit; }
+
+/* Overlay with crosshair */
+.scanner-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+.scanner-crosshair { position: relative; width: min(65%, 260px); aspect-ratio: 1; }
+.corner { position: absolute; width: 28px; height: 28px; }
+.corner::before, .corner::after { content: ""; position: absolute; background: #00e889; border-radius: 2px; }
+.corner::before { width: 28px; height: 3px; }
+.corner::after  { width: 3px;  height: 28px; }
+.corner.tl { top: 0; left: 0; }
+.corner.tr { top: 0; right: 0; }
+.corner.tr::before { right: 0; left: auto; }
+.corner.tr::after  { right: 0; left: auto; }
+.corner.bl { bottom: 0; left: 0; }
+.corner.bl::before { bottom: 0; top: auto; }
+.corner.bl::after  { bottom: 0; top: auto; }
+.corner.br { bottom: 0; right: 0; }
+.corner.br::before { right: 0; left: auto; bottom: 0; top: auto; }
+.corner.br::after  { right: 0; left: auto; bottom: 0; top: auto; }
+
+/* Animated scan line */
+@keyframes scanLine { 0% { top: 8%; } 50% { top: 88%; } 100% { top: 8%; } }
+.scanner-line { position: absolute; left: 4px; right: 4px; height: 2px; background: linear-gradient(90deg, transparent, #00e889, transparent); box-shadow: 0 0 12px 2px #00e88955; animation: scanLine 2.4s ease-in-out infinite; border-radius: 2px; }
+
+/* Hint below crosshair */
+.scanner-hint { display: flex; align-items: center; gap: 6px; margin-top: 18px; padding: 6px 14px; border-radius: 20px; background: #00000099; color: #e8f4f1; font-size: 12px; font-weight: 500; }
+
+/* Detected badge */
+.scanner-detected { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.detected-badge { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 20px; background: #00c978; color: #041610; font-size: 13px; font-weight: 700; letter-spacing: .02em; }
+
+/* Scanner controls bar */
+.scanner-controls { display: flex; align-items: center; gap: 10px; padding: 16px 0 0; flex-wrap: wrap; }
+.scanner-start-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 700; }
+.scanner-ctrl-btn { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; padding: 0; border-radius: 10px; background: #17383e; color: #8ff5ce; }
+.scanner-ctrl-btn:hover { background: #1f4a52; }
+.scanner-ctrl-btn.active { background: #00c978; color: #041610; }
+.scanner-stop-btn { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; }
+
+/* Inline scanner variant (no panel wrapper) */
+.scanner-inline { border: 1px solid #25454a; border-radius: 12px; padding: 16px; background: #0e252b; }
+.scanner-inline .scanner-controls { padding-top: 12px; }
+.scanner-inline .scanner-video { border-radius: 8px; }
+
+/* Scan prompt in add-asset modal */
+.scan-prompt { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 22px; border: 1px dashed #31555a; border-radius: 12px; background: #0a2026; text-align: center; }
+.scan-prompt-text { color: #91aaa8; font-size: 13px; margin: 0; }
+.scan-prompt .secondary { display: inline-flex; align-items: center; gap: 8px; }
+
+/* Scanned code preview in form */
+.scanned-code-preview { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-radius: 10px; background: #173d36; }
+.scanned-code-preview .text-button { padding: 4px 8px; font-size: 12px; }
+
+/* Wider modal for scanner-enabled add asset form */
+.modal-wide { width: min(100%, 540px); }
+
