@@ -4,12 +4,10 @@
     "slug": "fountain-gate-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "scheme": "fountaingate",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#1e293b"
     },
@@ -17,30 +15,24 @@
       "supportsTablet": true,
       "bundleIdentifier": "org.fountaingate.equipment",
       "infoPlist": {
-        "NSCameraUsageDescription": "Fountain Gate equipment scanner needs camera access to scan asset QR codes for checkouts and returns."
+        "NSCameraUsageDescription": "Fountain Gate equipment scanner needs camera access to scan asset QR codes and barcodes for checkouts and returns."
       }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#1e293b"
-      },
       "package": "org.fountaingate.equipment",
       "permissions": [
         "CAMERA"
       ]
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow Fountain Gate Equipment to access camera for scanning QR codes."
+          "cameraPermission": "Allow Fountain Gate Equipment to access camera for scanning QR codes and barcodes."
         }
-      ]
+      ],
+      "expo-asset"
     ]
   }
 }
