@@ -7,7 +7,11 @@ import { getSupabaseConfig } from "./supabase/config";
 import { requestRouter } from "./requests/request.routes";
 import { startRequestWorker } from "./requests/request.queue";
 
+const isTest = process.env.NODE_ENV === "test";
 dotenv.config();
+if (isTest) {
+  process.env.NODE_ENV = "test";
+}
 
 const app = express();
 const port = Number(process.env.PORT) || 5000;
@@ -60,7 +64,7 @@ app.get("/health", (_req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/requests", requestRouter);
 
-if (process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== "test" && !process.argv.some((arg) => arg.includes("test"))) {
   startRequestWorker();
   app.listen(port, "0.0.0.0", () => {
     console.log(`[Backend Server] running on http://0.0.0.0:${port}`);
